@@ -1,0 +1,104 @@
+
+public class lec2 {
+public static void main(String[] args) {
+//	print(1 , 5);
+//	coinPrint(3,"");
+//	partykartehai("ab" , "" ,0);
+//	chaloChalen(4,"");
+//	nikalGaya(0,0,2,2,"");
+	System.out.println(fibo(5));
+}
+public static void print(int s , int e) {
+	
+	if(s>e) {
+		return;
+	}
+	
+	System.out.println(s);;
+	print(s+1,e);
+	System.out.println(s);
+	
+}
+
+public static void coinPrint(int coin , String str) {
+//	base case
+	if(coin==0) {
+		System.out.println(str);
+		return;
+	}
+	
+	coinPrint(coin-1,str+"T");
+	coinPrint(coin-1, str+"H");
+}
+
+public static void partykartehai(String given , String str , int idx) {
+	
+	if(idx==given.length()) {
+		System.out.println("=>" + str);
+		return;
+	}
+	
+	partykartehai(given , str+given.charAt(idx) , idx+1);
+	partykartehai(given,str,idx+1);
+	partykartehai(given , str+ (int)given.charAt(idx) , idx+1);
+	
+}
+public static void chaloChalen(int n , String str) {
+	
+	
+	if(n==0) {
+		System.out.println(str);
+		return;
+	}
+	if(n-1>=0) {
+		
+		chaloChalen(n-1 , str + 1);
+	}
+	if(n-2>=0) {
+		
+		chaloChalen(n-2 , str+2);
+	}
+	
+	if(n-3>=0) {
+		
+		chaloChalen(n-3 , str+3);
+	}
+	
+}
+	
+public static void nikalGaya(int crow, int ccol , int frow, int fcol,String str) {
+	
+	if(ccol == fcol && crow == frow) {
+		System.out.println(str);
+		return;
+	}
+	if(ccol>fcol || crow>frow) {
+		return;
+	}
+//	if(crow>frow) {
+//		return;
+//	}
+	
+	
+	nikalGaya(crow , ccol+1 , frow, fcol , str + "R");
+	nikalGaya(crow+1 , ccol , frow , fcol , str+"D");
+	
+}
+
+	public static int fibo(int n) {
+			
+//		if(n<=1) {
+//			return n;
+//		}
+		if(n==1) {
+			return 1;
+		}
+		if(n==0) {
+			return 0;
+		}
+		
+		int sp1 = fibo(n-1);
+		int sp2 = fibo(n-2);
+		return sp1 + sp2;
+	}
+}
