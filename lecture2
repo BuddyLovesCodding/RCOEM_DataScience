@@ -101,4 +101,26 @@ public static void nikalGaya(int crow, int ccol , int frow, int fcol,String str)
 		int sp2 = fibo(n-2);
 		return sp1 + sp2;
 	}
+
+	public static void paranthesis(int op , int cl ,String str , ArrayList<String> al) {
+	
+	
+	if(cl<op) {
+		return;
+	}
+	
+	if(cl==op && op==0) {
+//		System.out.println(str);
+		al.add(str);
+		return;
+	}
+	if(op<0) {
+		return;
+	}
+	
+	paranthesis(op-1 , cl , str+"(" , al);
+	paranthesis(op , cl-1 , str + ")" , al);
+	
+	
+}
 }
