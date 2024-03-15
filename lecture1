@@ -1,0 +1,124 @@
+
+
+import java.util.ArrayList;
+
+public class lec1 {
+ public static void main(String[] args) {
+//	int arr1[] = {1,1,2,3,3,3,4,4,5};
+//	int arr2[] = {2,2,2,3,3,4,5,6,7,};
+//	
+//	int i = 0;
+//	int j = 0;
+//	ArrayList<Integer> al = new ArrayList<>();
+////	i<arr1.length || j<arr2.length
+////	i<arr1.length && j<arr2.length
+//	while(true) {
+//		 
+//		if(i>=arr1.length || j>=arr2.length) {
+//			break;
+//		}
+//		
+//		if(arr1[i]<arr2[j]) {
+//			i++;
+//		}
+//		else if(arr1[i]>arr2[j]) {
+//			j++;
+//		}
+//		else {
+////			i++;
+////			j++;
+//			al.add(arr2[j]);
+//			i++;
+//			j++;
+//		}
+//		
+//	}
+//	 int[] arr = {-5,-3,-5};
+//	 int ans = kadence(arr);
+//	 System.out.println(ans);
+	 
+	 String str = "aaa";
+	 countpalin(str);
+//	 System.out.println(ans);
+}
+ public static int kadence(int[] arr) {
+	 
+	int sum = 0;
+	int max = Integer.MIN_VALUE;
+	
+	for(int i = 0; i<arr.length ; i++) {
+		sum = sum + arr[i];
+		if(sum>max) {
+			max = sum;
+		}
+		if(sum<0) {
+			sum = 0;
+		}
+	}
+//	return max;
+	
+	int min = Integer.MAX_VALUE;
+	int sum2 = 0;
+	for(int i = 0;i <arr.length ; i++) {
+		sum2 = sum2+arr[i];
+		if(sum2<min) {
+			min = sum2;
+		}
+		if(sum2>0) {
+			sum2 = 0;
+		}
+	}
+	int sum3 = 0;
+	for(int i = 0; i<arr.length ; i++) {
+		sum3+=arr[i];
+	}
+	
+	if(sum3==min) {
+		return max;
+	}
+	
+	return Math.max(max, sum3-min);
+	
+ }
+ public static boolean isPalin(String str) {
+	
+	 int i =0;
+	 int j = str.length()-1;
+	 while(i<j) {
+		 if(str.charAt(i)==str.charAt(j)) {
+			 i++;
+			 j--;
+		 }
+		 else {
+			 return false;
+		 }
+	 }
+	 return true;
+ }
+ 
+ public static void countpalin(String str) {
+	 int ans = 0;
+	 for(int i = 0;i<str.length();i++) {
+		  ans = ans +  grow(str , i , i);
+		  ans = ans +  grow(str,i,i+1);
+	 }
+	 System.out.println(ans);
+ }
+ public static int grow(String str, int left , int right) {
+	  int count = 0;
+	 while(left>=0 && right<str.length()) {
+		 
+		 if(str.charAt(left) == str.charAt(right)) {
+			 count++;
+			 left--;
+			 right++;
+		 }
+		 else {
+			 break;
+		 }
+		 
+	 }
+	 return count;
+	 
+ }
+}
