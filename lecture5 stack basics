@@ -1,0 +1,28 @@
+package SRCEM_pack1;
+
+import java.util.Stack;
+
+public class lec5 {
+public static void main(String[] args) {
+	Stack<Integer> st = new Stack<>();
+	st.add(1);
+	st.add(2);
+	st.add(3);
+	st.add(4);
+	st.add(5);
+	
+	solve(st);
+	System.out.println(st);
+}
+public static void solve(Stack<Integer> st) {
+	
+	if(st.isEmpty()) {
+		return;
+	}
+	
+	int value = st.pop();
+	solve(st);
+	System.out.println(value);
+	st.add(value);
+}
+}
