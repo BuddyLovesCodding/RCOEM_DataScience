@@ -1,0 +1,153 @@
+
+
+import java.util.Arrays;
+
+public class lec7 {
+public static void main(String[] args) {
+	
+//	int arr[] = {7,8,0,4,3,2,1};
+//	
+//	nextPermutation(arr);
+	
+	int queens = 8;
+	int frow = queens-1;
+	int fcol = queens-1;
+	int visited[][] = new int[queens][queens];
+	queenBithao(0 , 0 , frow , fcol , queens , visited );
+}
+
+public static void nextPermutation(int[] arr) {
+	
+	int x = -1;
+	for(int i = arr.length-2 ; i>=0 ; i--) {
+		
+		if(arr[i]<arr[i+1]) {
+			x = i;
+			break;
+		}
+		
+	}
+	
+//	System.out.println(x);
+	int badaNumber = -1;
+	if(x!=-1) {
+		
+		for(int i = arr.length-1 ; i>x ; i--) {
+			
+			if(arr[i]>arr[x]) {
+				badaNumber = i;
+				break;
+			}
+		}
+		
+		swap(x , badaNumber , arr);
+	}
+	
+	reverse(x+1 , arr);
+	System.out.println(Arrays.toString(arr));
+	
+}
+public static void swap(int x , int badaNumber , int[] arr) {
+	int temp = arr[x];
+	arr[x] = arr[badaNumber];
+	arr[badaNumber] =temp;
+}
+public static void reverse(int y , int[] arr) {
+	int i = y;
+	int j = arr.length-1;
+	while(i<j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] =temp;
+		i++;
+		j--;
+	}
+}
+
+private static void queenBithao(int crow, int ccol, int frow, int fcol, int q, int[][] visited) {
+	
+	if(q==0) {
+		System.out.println("=======");
+		print(visited);
+		return;
+	}
+	
+	if(ccol>fcol) {
+		crow++;
+		ccol = 0;
+	}
+	if(crow>frow) {
+		return;
+	}
+	
+	
+	if(isSafe(visited , ccol , crow , fcol)) {
+		visited[crow][ccol] = 1;
+		queenBithao(crow , ccol+1 , frow , fcol , q-1 , visited );
+		visited[crow][ccol] = 0;
+	}
+	queenBithao(crow , ccol+1 , frow, fcol , q , visited);
+	
+}
+
+public static boolean isSafe(int[][]visited , int ccol , int crow , int fcol) {
+	
+//	check left 
+	for(int i = ccol-1 ; i>=0 ; i--) {
+		
+		if(visited[crow][i] ==1) {
+			return false;
+		}
+	}
+	
+//	check up
+	for(int i = crow-1 ; i>=0 ; i--) {
+		
+		if(visited[i][ccol] ==1) {
+			return false;
+		}
+	}
+	
+//	check left-upward diagonal
+	int i = crow-1;
+	int j = ccol-1;
+	
+	while(i>=0 && j>=0) {
+		if(visited[i][j] ==1) {
+			return false;
+		}
+		i--;
+		j--;
+	}
+	
+//	check right-upward diagonal
+	
+	i = crow-1;
+	j = ccol+1;
+	while(i>=0 && j<=fcol) {
+		if(visited[i][j] ==1) {
+			return false;
+		}
+		i--;
+		j++;
+	}
+	
+	return true;
+}
+
+public static void print(int[][] visited) {
+	
+	for(int i =0; i<visited.length ; i++) {
+		for(int j =0 ; j<visited[i].length ; j++) {
+			if(visited[i][j]==1) {
+				System.out.print("Q ");
+			}
+			else {
+				System.out.print(". ");
+			}
+			
+		}
+		System.out.println();
+	}
+}
+}
